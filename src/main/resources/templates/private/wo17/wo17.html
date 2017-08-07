@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout/base">
+<head>
+    <title>一起沃签到</title>
+</head>
+<body>
+<div class="container">
+    <div layout:fragment="content">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>手机</th>
+                <th class="hidden-md-down">最后</th>
+                <th>结果</th>
+                <th>总流量</th>
+                <th>更多</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="wo17:${wo17s}">
+                <th th:text="${wo17.phone}">12345678910</th>
+                <td th:text="${wo17.time}" class="hidden-md-down">2017-7-7 13:15:30</td>
+                <td th:text="${wo17.success}">True</td>
+                <td th:text="${wo17.flow}">100.3M</td>
+                <th>More...</th>
+            </tr>
+            </tbody>
+        </table>
+
+        <!-- Button trigger modal -->
+        <div>
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addWo17">
+                添加一起沃账号
+            </button>
+        </div>
+        <!-- 添加一起沃表单 -->
+        <th:block th:replace="/private/wo17/add :: #addWo17"/>
+    </div>
+</div>
+
+<th:block layout:fragment="footer">
+    <script src="https://cdn.bootcss.com/1000hz-bootstrap-validator/0.11.9/validator.min.js"></script>
+</th:block>
+</body>
+</html>

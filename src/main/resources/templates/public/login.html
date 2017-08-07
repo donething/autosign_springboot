@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout/base">
+<head>
+    <title>登录</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="container form login">
+        <form class="form-horizontal" id="loginForm" method="post" action="" onsubmit="return login()"
+              data-toggle="validator">
+            <div class="form-group row">
+                <label for="username" class="col-md-1">账号：</label>
+                <input type="text" name="username" id="username" class="form-control col-md-4"
+                       placeholder="用户名" required autofocus>
+                <div class="help-block with-errors"></div>
+            </div>
+            <div class="form-group row">
+                <label for="password" class="col-md-1">密码：</label>
+                <input type="password" name="password" id="password" class="form-control col-md-4" placeholder="密码"
+                       required>
+                <div class="help-block with-errors"></div>
+            </div>
+            <div class="form-check">
+                <label class="form-check-label">
+                    <input type="checkbox" class="form-check-input" name="rememberMe" id="rememberMe" checked/>
+                    10天内免登陆
+                </label>
+            </div>
+
+            <div class="form-group row">
+                <input type="submit" name="submit" id="submit" class="form-control col-md-1 btn btn-primary" value="登录">
+                <input type="reset" name="reset" id="reset" class="form-control col-md-1 btn" value="清空">
+            </div>
+        </form>
+    </div>
+</div>
+<th:block layout:fragment="footer">
+    <script src="https://cdn.bootcss.com/1000hz-bootstrap-validator/0.11.9/validator.min.js"></script>
+</th:block>
+</body>
+</html>

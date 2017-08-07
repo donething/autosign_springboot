@@ -1,7 +1,6 @@
 package net.donething.autosign.functions
 
 import net.donething.autosign.models.JSONResult
-import net.donething.dtjavatool.HttpTool
 import org.junit.Test
 import org.springframework.boot.json.BasicJsonParser
 import java.io.File

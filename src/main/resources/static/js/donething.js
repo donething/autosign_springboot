@@ -70,10 +70,11 @@ function create() {
                 switch (data.code) {
                     case 20:
                     case 22:
+                    case 23:
                         selector = $("#registerForm #username");
                         break;
                     case 21:
-                    case 23:
+                    case 24:
                         selector = $("#registerForm #email");
                         break;
                     default:

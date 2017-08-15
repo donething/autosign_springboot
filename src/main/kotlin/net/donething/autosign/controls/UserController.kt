@@ -20,7 +20,7 @@ class UserController @Autowired constructor(val repository: UserRepository) {
     /**
      * 创建用户
      * 错误代码说明：10：创建成功；20：用户名已被使用；21：邮箱已被使用；22：用户名、邮箱或密码为空；
-     * 23：邮箱格式不对；30程序运行错误
+     * 23：用户名包含非法字符；24：邮箱包含非法字符；30程序运行错误
      */
     @RequestMapping(value = "/create", method = arrayOf(RequestMethod.POST))
     fun create(request: HttpServletRequest, @RequestParam username: String, @RequestParam password: String, @RequestParam email: String): JSONResult {
@@ -29,9 +29,13 @@ class UserController @Autowired constructor(val repository: UserRepository) {
         if (!CommHelper.notBlank(username, password, email)) {
             return JSONResult(false, 22, "用户名、邮箱或密码为空")
         }
-        // 邮箱必须包含字符'@'
-        if (!email.contains("@")) {
-            return JSONResult(false, 24, "邮箱格式不对")
+        // 用户名不能包含非法字符
+        if (!username.matches("""^[a-zA-Z0-9_\u4e00-\u9fa5]{1,16}${'$'}""".toRegex())) {
+            return JSONResult(false,23, "用户名包含非法字符" )
+        }
+        // 邮箱必须包含字符'@'且不能包含非法字符
+        if (!email.contains("@") || !email.matches("""^[a-zA-Z0-9_@\.]{1,50}${'$'}""".toRegex())) {
+            return JSONResult(false, 24, "邮箱包含非法字符")
         }
         // 判断用户名、邮箱是否已经被使用
         if (repository.findByUsernameIgnoreCase(username) != null) {
